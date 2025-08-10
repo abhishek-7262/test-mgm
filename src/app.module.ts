@@ -5,10 +5,29 @@ import { UsersModule } from './users/users.module';
 import { QuestionsModule } from './questions/questions.module';
 import { TestsModule } from './tests/tests.module';
 import { ResultsModule } from './results/results.module';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { connection } from 'mongoose';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, QuestionsModule, TestsModule, ResultsModule],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRootAsync({
+      useFactory: async () => ({
+        uri: process.env.MONGODB_URI,
+        connectionFactory: (connection) => {
+          connection.on('connected', () => {
+            console.log('connected to db')
+          });
+          return connection;
+        }
+      })
+    }),
+
+
+    UsersModule, QuestionsModule, TestsModule, ResultsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
