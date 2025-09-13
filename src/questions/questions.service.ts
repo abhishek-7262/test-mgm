@@ -8,6 +8,6 @@ export class QuestionsService {
     constructor(@InjectModel(Question.name) private QuestionModel: Model<QuestionDocument>) { }
 
     async newQuestion(questionDto: Partial<Question>) {
-        const { questionText, options, correctAnswer, marks } = questionDto
+        //const { questionText, options, correctAnswer, marks } = questionDto
     }
 }
