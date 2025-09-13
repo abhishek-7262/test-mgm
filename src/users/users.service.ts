@@ -20,4 +20,8 @@ export class UsersService {
 
         return user.save()
     }
+
+    async findByEmail(email: string): Promise<UserDocument | null> {
+        return this.UserModel.findOne({ email })
+    }
 }
