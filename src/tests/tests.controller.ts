@@ -13,7 +13,7 @@ export class TestsController {
     async create(@Body() createTestDto: CreateTestDto, @Request() req: any) {
         const userId = req.user._id;   // get user ID from JWT payload
 
-        console.log(userId, " testsssss")
+        //console.log(userId, " testsssss")
 
         try {
             return this.testsService.create(createTestDto, userId)
