@@ -13,10 +13,10 @@ export class Section {
     @Prop({ required: true })
     grade: string;
 
-    @Prop({ type: [{ type: Types.ObjectId, ref: User }] })
+    @Prop({ type: [{ type: Types.ObjectId, ref: () => User }] })
     students: Types.ObjectId[];
 
-    @Prop({ type: Types.ObjectId, ref: 'User', required: false })
+    @Prop({ type: [{ type: Types.ObjectId, ref: () => User }] })
     classTeacher?: Types.ObjectId; // Optional: assign a teacher
 
     @Prop({ required: false })
